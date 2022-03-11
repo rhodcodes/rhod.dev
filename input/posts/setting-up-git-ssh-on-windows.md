@@ -20,7 +20,7 @@ Check that you've got SSH installed first of all, type `ssh` into your [terminal
 of choice and see if it errors or not. If you don't have it installed you can fire up a powershell window
 with Administrator rights and type in the command below.
 
-```ps
+```powershell
 Add-WindowsCapability -Online -Name OpenSSH.Client
 ```
 
@@ -29,7 +29,7 @@ Add-WindowsCapability -Online -Name OpenSSH.Client
 SSH-Agent is a service that manages the SSH keys that we'll create later on.By default it's disabled, so
 we'll start off by getting it to run, and making it start up automatically on boot.
 
-```ps
+```powershell
 # (With Admin rights)
 Start-Service -Name ssh-agent
 
@@ -58,7 +58,7 @@ I'm including the RSA key here because not everywhere supports elliptic curve cr
 so you can fall back to it if needed. [Azure Devops](https://devops.azure.com) - I'm looking
 at you.
 
-```ps
+```shell
 # Ed25519
 ssh-keygen -t ed25519 -C "user@host"
 
@@ -88,7 +88,7 @@ Next we add the keys to ssh-agent so that the service can present them when aske
 If you've used the default location and file names in the previous step then you just run `ssh-add`
 which will pick up the key files in `.ssh/` and list the keys added.
 
-```ps
+```shell
 ssh-add
 ```
 
@@ -96,7 +96,7 @@ ssh-add
 
 You might get the following error when running `ssh-add` or trying to use your ssh keys.
 
-```
+```shell
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -119,7 +119,7 @@ particular host. This is where the [SSH config file](https://www.ssh.com/academy
 Create a file called `config` (no extension) in your `.ssh/` directory, and set it similar to the example below. **Note: The one space
 indent before IdentityFile is important**
 
-```
+```shell
 Host ssh.dev.azure.com
  IdentityFile ~/.ssh/id_rsa
 Host github.com
@@ -140,7 +140,7 @@ their own SSH binaries.
 Using the powershell below will set the environmental variable to the correct value or create it if
 it doesn't already exist.
 
-```ps
+```powershell
 [System.Environment]::SetEnvironmentVariable('GIT_SSH','C:\Windows\System32\OpenSSH\ssh.exe')
 ```
 
@@ -150,7 +150,7 @@ it doesn't already exist.
 
 Before doing any work with git you'll need to set it up to use your name and email.
 
-```ps
+```shell
 git config --global user.name 'Rhod'
 git config --global user.email rhod@nospamhereplease.com
 ```
@@ -166,7 +166,7 @@ git itself has added an option in it's global config to [change the default](htt
 If you're going to do a lot of your work on GitHub then it makes sense to change your
 default branch to match GitHub.
 
-```ps
+```shell
 git config --global init.defaultBranch main
 ```
 
@@ -184,7 +184,7 @@ This is the user and the host we need for SSH. For example `git clone git@github
 is how I'd clone the repo for this blog.And `git@github.com` is the user and the host we need to
 manually connect via SSH.
 
-```ps
+```shell
 ssh git@github.com
 
 The authenticity of host `github.com (140.82.121.4)' cant be established.
@@ -197,7 +197,7 @@ that we trust any future connections to that host with that particular key finge
 
 Here are the user and hosts for manually connecting to some of the major Git Hosts
 
-```ps
+```shell
 GitHub:         git@github.com
 GitLab:         git@gitlab.com
 Azure DevOps:   git@ssh.dev.azure.com
@@ -205,7 +205,7 @@ Azure DevOps:   git@ssh.dev.azure.com
 
 If you're having issues connecting run the ssh with verbosity to get it to dump a load of extra info, including which key file it's attempting to use.
 
-```ps
+```shell
 ssh -v git@ssh.dev.azure.com
 ```
 
