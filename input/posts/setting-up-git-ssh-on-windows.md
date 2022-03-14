@@ -2,7 +2,7 @@
 Title: "Setting Up Git & SSH on Windows"
 Description: "How to set up git to use ssh on Windows using OpenSSH"
 Published: 2022-03-12
-Image: posts/setting-up-git-ssh-on-windows-cover.jpg
+Image: "img/setting-up-git-ssh-on-windows-cover.jpg"
 Tags: ["git", "ssh", "windows", "putty", "github"]
 ---
 
