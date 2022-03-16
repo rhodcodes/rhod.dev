@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/rhodri
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://rhod.dev
+  * I am rhodri (https://keybase.io/rhodri) on keybase.
+  * I have a public key with fingerprint 8585 D921 1A01 06CB 0E11  4940 07A8 66D1 2244 FAD5
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120f4db2e517e8b726efbf2adcec32ed6591ae768dd28451771dd5e650d0532b2cb0a",
+      "fingerprint": "8585d9211a0106cb0e11494007a866d12244fad5",
+      "host": "keybase.io",
+      "key_id": "07a866d12244fad5",
+      "kid": "0101399d14f9ca37cf9844e97960681cc6eb424c827737111006fbc144377b3531350a",
+      "uid": "71e266c7007e1a36dfb6d0174eb86019",
+      "username": "rhodri"
+    },
+    "service": {
+      "hostname": "rhod.dev",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1647443158,
+  "expire_in": 157680000,
+  "prev": "f424ee49ba820c84e8df1c6f77f9807b8e0473733968c18c7b14f973c1e96cf0",
+  "seqno": 45,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMNtAnicZVJ9TFVlHL6AotzAQAhBF+BZYCrCec/3uYQfS5tBI1MU+cjL+XjP5aTe
+c7kffAqGYshkTBnQBjGhyxZELeQjbbYcVO46KyU++uC2RhhGCpcRkDBcnUO5tfX+
+8+79vc/z/J7f875fBPjo9F5r2qQBZO/SsNftvhqHjgfLI8UIr4iFiKEYOQ5XNnhC
+hDa78bgsIgYEBRgqESKPQRLQkOFpjIISL2GcKEABx6BIkSzgIE0xoogxhAqigSiS
+kCJRESVxjMcEHuWQWESSzSZotVhls12VZUiGFFkMAA4FKKVCIAAES6AozTEUJQIM
+IwiJE0mVmKPYNIZqjudsME5W1Jp6MP5j7//4J75RgLOsCAiJFTicFiSWIQjI0iyF
+UgwQBAryBEYIDEbTOA0AQFFK4gVAEDhN8ziJA5xc8e1YkaMBxChKoFWDEHA4JUo8
+JaKAJiDPUChgNaANWs3cSaiirTmKaJWRklhEreXJAtRi1eb4z32cCPNUlsWq2BVB
+OaFWc+x2i82gseyFFg2WD3njvwJGXjaLaoIqIw9abbJiRgxARQp2WVMEFEGrzgHJ
+xCKwwCJboVHWEKT6Lqi6tD5qOwMiqTNDSLA8x2CowBCQESUgUBJNq/mgNM9AlFDz
+wHGWYgTACDSvBUjjAoAsJUgooo2Ua1YQA0GqPjmTqmmTTWbO7rBCpKS/L2uVzkuv
+813trX0tnd4v8MmHSyoK1NX+uTfi4bKxbm7R79HrW1OuX52edHWfe9iUdTS3O9MT
+HbnTd8knuvCn6DuzB0yX9Ml30fnsmt988s+Pt42nJ9XlOBrKrkx9NdLyyZldqRmm
+lzKmKt3v9jp3o2E9HaszLnanfM5n6rIeJLJNH0vKbFqME+Z5qt84pJQjtaMHTt/w
+6D1C14ylsXr29pGbM/qUig1yYND9y/Npb39zKn66tTZY1McHba+ou5izYU1HakTb
+lnPPL/o0J5YQdxbOw5uuX15INGWYTEFVIWBo8OeRsOzgb+Pz/4rc0bxQ1b9uLXBe
+2UQ2tOuPbW6Xb3nG3dI7PQ2vOlyuezUfuU0hJU7gueC36ZjxmV2h60uLDif/0JLc
+W/n+6K2Xq/IPXuv1jpuP6N/eSju7OmImrm9LiNu4cUfzfX8kIKxr4o+57H1JY31T
+LTWhH8TdcCcovtjJywPhCfXhzzqm5woiO53Y1m3XIjJjNn9asbZsT/Sb+4RTgfu/
+tPqHOjt9QntmAvBhJGDI+8Er46dL/bpcrdkV9Oj+8dzf6yPwR6WvHXwqaWfk47sh
+UYti+uTjwezO4TNh7QXS902VjvW7n5509RfPule1ndW92E3eSy8uuDQ2OLE0EG5L
+GHM+19q47rOoxsKj3blvlX2YsjAU6D5SbmytPnFo9j3/C9+lmtKm4JZfS75eOBxc
+v1z+49WxosyzUX8DnLO6Nw==
+=t7bc
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/rhodri
+
+==================================================================
