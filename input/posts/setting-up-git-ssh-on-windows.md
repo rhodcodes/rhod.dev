@@ -31,9 +31,8 @@ we'll start off by getting it to run, and making it start up automatically on bo
 
 ```powershell
 # (With Admin rights)
-Start-Service -Name ssh-agent
-
 Set-Service -Name ssh-agent -StartupType "Automatic"
+Start-Service -Name ssh-agent
 ```
 
 ## Creating your SSH Key
