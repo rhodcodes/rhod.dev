@@ -1,13 +1,13 @@
 ---
 Title: "Setting Up Git & SSH on Windows"
-Description: "How to set up git to use ssh on Windows 10 and using OpenSSH"
-Published: 2021-02-25
-Images: ["post-cover.png"]
-Tags: ["git", "ssh", "windows"]
+Description: "How to set up git to use ssh on Windows using OpenSSH"
+Published: 2022-03-12
+Image: "img/setting-up-git-ssh-on-windows-cover.jpg"
+Tags: ["git", "ssh", "windows", "putty", "github"]
 ---
 
 I recently had to rebuild my work laptop and had to remember how I had set up [Git](https://git-scm.com),
-and I remembered that it was a pain in the arse. But after discovering that Windows 10 Pro comes with
+and I remembered that it was a pain in the arse. But after discovering that Windows 10/11 Pro comes with
 an inbuilt [SSH client](<https://en.wikipedia.org/wiki/SSH_(Secure_Shell)>) and SSH-Agent I realised that
 it was going to be a lot easier than messing around with PuTTy.
 
@@ -20,7 +20,7 @@ Check that you've got SSH installed first of all, type `ssh` into your [terminal
 of choice and see if it errors or not. If you don't have it installed you can fire up a powershell window
 with Administrator rights and type in the command below.
 
-```ps
+```powershell
 Add-WindowsCapability -Online -Name OpenSSH.Client
 ```
 
@@ -29,7 +29,7 @@ Add-WindowsCapability -Online -Name OpenSSH.Client
 SSH-Agent is a service that manages the SSH keys that we'll create later on.By default it's disabled, so
 we'll start off by getting it to run, and making it start up automatically on boot.
 
-```ps
+```powershell
 # (With Admin rights)
 Start-Service -Name ssh-agent
 
@@ -47,7 +47,7 @@ Ocean have a good article about it
 
 We'll create three types of keys:
 
-1. **Ed25519** - Uses elliptic curve cryptography (I have no idea what it means, but it sounds good) to produce
+1. **Ed25519** - Uses elliptic curve cryptography (I have no idea what it means, but it sounds fancy) to produce
    a short key that's quick to process but tough to break and it's the recommended key type to use when you can.
 1. **ECDSA** - Is another elliptic curve based key, it's more widely supported than Ed25519 so we'll include it
    as an intermediary between Ed25519 and RSA.
@@ -58,7 +58,7 @@ I'm including the RSA key here because not everywhere supports elliptic curve cr
 so you can fall back to it if needed. [Azure Devops](https://devops.azure.com) - I'm looking
 at you.
 
-```ps
+```shell
 # Ed25519
 ssh-keygen -t ed25519 -C "user@host"
 
@@ -88,8 +88,44 @@ Next we add the keys to ssh-agent so that the service can present them when aske
 If you've used the default location and file names in the previous step then you just run `ssh-add`
 which will pick up the key files in `.ssh/` and list the keys added.
 
-```ps
+```shell
 ssh-add
+```
+
+### Always Protect Your Private(s)
+
+You might get the following error when running `ssh-add` or trying to use your ssh keys.
+
+```shell
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions for 'id_rsa' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "id_rsa": bad permissions
+git@github.com: Permission denied (publickey).
+```
+
+To fix this you need to open up the advanced permissions tab and disable inheritance and remove all permissions before giving yourself full control of the file. All the details and screenshots are availble at this [StackExchange Answer](https://superuser.com/a/1296046).
+
+You'll need to do this for all the `key files` and the `config` file we'll set up below. And if you know how to do this via powershell then let me know and I'll edit this post to include it.
+
+### Which key to use?
+
+Since we have multiple keys we need to tell OpenSSH which key to use with a
+particular host. This is where the [SSH config file](https://www.ssh.com/academy/ssh/config) comes in useful.
+
+Create a file called `config` (no extension) in your `.ssh/` directory, and set it similar to the example below. **Note: The one space
+indent before IdentityFile is important**
+
+```shell
+Host ssh.dev.azure.com
+ IdentityFile ~/.ssh/id_rsa
+Host github.com
+ IdentityFile ~/.ssh/id_ed25519
+Host gitlab.com
+ IdentityFile ~/.ssh/id_ed25519
 ```
 
 ## Fixing the Environment
@@ -104,7 +140,7 @@ their own SSH binaries.
 Using the powershell below will set the environmental variable to the correct value or create it if
 it doesn't already exist.
 
-```ps
+```powershell
 [System.Environment]::SetEnvironmentVariable('GIT_SSH','C:\Windows\System32\OpenSSH\ssh.exe')
 ```
 
@@ -114,9 +150,9 @@ it doesn't already exist.
 
 Before doing any work with git you'll need to set it up to use your name and email.
 
-```ps
-git config --global user.name 'Thor'
-git config --global user.email thor@valhalla.net
+```shell
+git config --global user.name 'Rhod'
+git config --global user.email rhod@nospamhereplease.com
 ```
 
 ### Renaming the default branch
@@ -130,7 +166,7 @@ git itself has added an option in it's global config to [change the default](htt
 If you're going to do a lot of your work on GitHub then it makes sense to change your
 default branch to match GitHub.
 
-```ps
+```shell
 git config --global init.defaultBranch main
 ```
 
@@ -148,7 +184,7 @@ This is the user and the host we need for SSH. For example `git clone git@github
 is how I'd clone the repo for this blog.And `git@github.com` is the user and the host we need to
 manually connect via SSH.
 
-```ps
+```shell
 ssh git@github.com
 
 The authenticity of host `github.com (140.82.121.4)' cant be established.
@@ -161,15 +197,24 @@ that we trust any future connections to that host with that particular key finge
 
 Here are the user and hosts for manually connecting to some of the major Git Hosts
 
-```ps
+```shell
 GitHub:         git@github.com
 GitLab:         git@gitlab.com
 Azure DevOps:   git@ssh.dev.azure.com
 ```
 
+If you're having issues connecting run the ssh with verbosity to get it to dump a load of extra info, including which key file it's attempting to use.
+
+```shell
+ssh -v git@ssh.dev.azure.com
+```
+
 ## Conclusion
 
 In this article we've walked through setting up and configuring both git and ssh so they work
-together without any future action need on a Windows 10 system.
+together without any future action need on a Windows system.
 
 Thanks for reading.
+
+_Cover photo by [Markus Spiske](https://unsplash.com/@markusspiske?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on
+[Unsplash](https://unsplash.com/s/photos/authentication?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)._
