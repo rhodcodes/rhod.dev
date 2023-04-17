@@ -1,6 +1,6 @@
 #!/bin/sh
 curl -sSL https://dot.net/v1/dotnet-install.sh > dotnet-install.sh
 chmod +x dotnet-install.sh
-./dotnet-install.sh -c 6.0 -InstallDir ./dotnet6
-./dotnet6/dotnet --version
-./dotnet6/dotnet run -c Release
+./dotnet-install.sh -c 7.0 -InstallDir ./dotnet7
+./dotnet7/dotnet --version
+./dotnet7/dotnet run -c Release
